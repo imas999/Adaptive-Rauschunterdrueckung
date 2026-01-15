@@ -1,2 +1,7 @@
 # Ignoriere PDF-Dateien
 Aufgabe_Gruppe4.pdf
+
+# Python Virtual Environment
+venv/
+*.pyc
+__pycache__/
