@@ -2,7 +2,7 @@
 #define LMS_HPP
 
 #define _USE_MATH_DEFINES
-#include <math.h>
+#include <cmath>
 
 // Konfigurationsparameter für Stabilität
 #define SILENCE_THRESHOLD    1e-7f    // Schwellwert für Stille-Erkennung
@@ -10,6 +10,7 @@
 #define MAX_COEFF_VALUE      10.0f    // Maximale Koeffizientengröße --> Verhindert Instabilität durch entgleisende Koeffizienten
 #define ENERGY_SMOOTHING     0.99f    // Glättung für Energieschätzung
 #define ENERGY_SMOOTHING_INV 0.01f    // (1 - ENERGY_SMOOTHING) vorberechnet
+#define M_PI                3.14159265f
 
 /**
  * @brief Adaptive Rauschunterdrückung mittels Block-LMS-Algorithmus für sinusförmige Störsignale
