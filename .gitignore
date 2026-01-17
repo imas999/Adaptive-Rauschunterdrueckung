@@ -1,0 +1,35 @@
+# Python Virtual Environment
+.venv/
+venv/
+env/
+
+# Python Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Komplette Ordner ignorieren
+Matlab/
+Conversion-Tools/
+
+# Output Ordner: Nur PDFs behalten, Rest ignorieren
+Output/*
+!Output/*.pdf
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Temporäre Dateien
+*.tmp
+*.bak
+*.log
