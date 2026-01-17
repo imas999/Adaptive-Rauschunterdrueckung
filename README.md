@@ -1,40 +1,10 @@
 # Adaptive Rauschunterdrückung mit Block-LMS
 
 Adaptive 50Hz-Störunterdrückung für DSP-Board FM4-176-S6E2CC-ETH mittels Block-LMS Algorithmus.
+Dieses Projekt implementiert einen adaptiven Block-LMS Filter zur Unterdrückung von 50Hz Netzbrummen in Audiosignalen. 
+Die Implementierung ist optimiert für Echtzeit-Verarbeitung auf einem Embedded DSP-Board.
 
-## 📋 Überblick
-
-Dieses Projekt implementiert einen adaptiven Block-LMS Filter zur Unterdrückung von 50Hz Netzbrummen in Audiosignalen. Die Implementierung ist optimiert für Echtzeit-Verarbeitung auf einem Embedded DSP-Board.
-
-## 🎯 Features
-
-- **Block-LMS Algorithmus**: Effiziente blockweise Verarbeitung
-- **50Hz Störunterdrückung**: Bis zu 27.5 dB bei 48 kHz Abtastrate
-- **Echtzeit-fähig**: Optimiert für niedrige Latenz
-- **Konfigurierbar**: Flexible Filterordnung (M) und Schrittweite (μ)
-
-## 📁 Projektstruktur
-
-```
-├── blockLMS.cpp                    # C++ Hauptimplementierung
-├── LMS.hpp                         # Header-Datei mit Konstanten
-├── test.wav                        # Test-Audiodatei (8 kHz, Sprache + 50Hz)
-│
-├── Evaluation/                     # Test- und Evaluations-Skripte
-│   ├── test_blockLMS.py                    # Parameter-Sweep Tests
-│   ├── test_blockgroessen.py               # Blockgrößen-Analyse
-│   ├── test_blockLMS_kontinuierlich.py     # Kontinuierliche Verarbeitung
-│   └── analyse_frequenzselektivitaet.py    # Frequenzgang-Analyse
-│
-├── Output/                         # Testergebnisse (nur PDFs im Repo)
-│   ├── Testergebnisse_BlockLMS.pdf
-│   └── Testergebnisse_Blockgroessen.pdf
-│
-├── requirements.txt                # Python-Abhängigkeiten
-└── README.md                       # Diese Datei
-```
-
-## 🚀 Installation
+## Installation
 
 ### C++ Implementierung (DSP-Board)
 
@@ -53,7 +23,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## 🔧 Verwendung
+##  Verwendung
 
 ### C++ Algorithmus
 
@@ -84,7 +54,7 @@ python Evaluation/analyse_frequenzselektivitaet.py
 python Evaluation/test_blockLMS_kontinuierlich.py
 ```
 
-## 📊 Testergebnisse
+##  Testergebnisse
 
 ### Empfohlene Parameter
 
@@ -109,7 +79,7 @@ python Evaluation/test_blockLMS_kontinuierlich.py
 
 Detaillierte Ergebnisse finden Sie in den PDF-Reports im `Output/` Ordner.
 
-## 🎛️ Konfiguration
+## Konfiguration
 
 In `LMS.hpp` können folgende Parameter angepasst werden:
 
@@ -127,7 +97,7 @@ In `LMS.hpp` können folgende Parameter angepasst werden:
 #define ENERGY_SMOOTHING 0.99f      // Glättungsfaktor
 ```
 
-## 🔬 Algorithmus-Details
+## Algorithmus-Details
 
 Der Block-LMS Filter nutzt eine sinusförmige Referenzsignal bei 50 Hz zur adaptiven Störunterdrückung:
 
@@ -144,7 +114,7 @@ Wobei:
 - `x(n)`: Referenzsignal
 - `E[x²(n)]`: Geglättete Energie
 
-## 📈 Performance
+## Performance
 
 ### DSP-Board: FM4-176-S6E2CC-ETH
 
@@ -158,14 +128,6 @@ Wobei:
   - Block=64: 1.33 ms @ 48 kHz
   - Block=128: 2.67 ms @ 48 kHz
 
-## 🛠️ Entwicklung
-
-### Voraussetzungen
-
-- **C++:** Compiler mit C++11 Support
-- **Python:** 3.8+
-- **Bibliotheken:** numpy, scipy, matplotlib (siehe requirements.txt)
-
 ### Tests ausführen
 
 ```bash
@@ -175,24 +137,3 @@ python -m pytest Evaluation/
 # Mit Coverage
 pytest --cov=Evaluation/
 ```
-
-## 📄 Lizenz
-
-Dieses Projekt steht unter der MIT-Lizenz.
-
-## 👥 Autoren
-
-Entwickelt für DSP-Praktikum - Adaptive Signalverarbeitung
-
-## 🤝 Beiträge
-
-Contributions sind willkommen! Bitte erstellen Sie einen Pull Request oder öffnen Sie ein Issue.
-
-## 📚 Referenzen
-
-- Haykin, S. (2002). Adaptive Filter Theory (4th ed.)
-- Widrow, B., & Stearns, S. D. (1985). Adaptive Signal Processing
-
-## 📞 Kontakt
-
-Für Fragen oder Anregungen öffnen Sie bitte ein Issue im Repository.
