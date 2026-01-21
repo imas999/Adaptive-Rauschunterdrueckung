@@ -33,3 +33,6 @@ desktop.ini
 *.tmp
 *.bak
 *.log
+
+FFT.cpp
+FFT.hpp

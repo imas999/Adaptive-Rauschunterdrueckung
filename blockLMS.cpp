@@ -42,14 +42,7 @@ void blockLMS(float *inputBlock, float *outputBlock, float *filterCoeffs, int an
         float updateFaktor = zweiMu * fehlerSignal;
         
         // Leakage NUR bei Stille (außerhalb der inneren Schleife entscheiden)
-        if (istStille) {
-            for (int k = 0; k < M; k++) {
-                float sinReferenz = sinf(momentanePhase - k * phasenIncrement);
-                filterCoeffs[k] = LEAKAGE_FACTOR * filterCoeffs[k] + updateFaktor * sinReferenz;
-                
-                filterCoeffs[k] = clippingCheck(filterCoeffs[k]);
-            }
-        } else {
+        if (!istStille) {
             for (int k = 0; k < M; k++) {
                 float sinReferenz = sinf(momentanePhase - k * phasenIncrement);
                 filterCoeffs[k] += updateFaktor * sinReferenz;
