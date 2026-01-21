@@ -6,11 +6,12 @@
 
 // Konfigurationsparameter für Stabilität
 #define SILENCE_THRESHOLD    1e-7f    // Schwellwert für Stille-Erkennung
-#define LEAKAGE_FACTOR       0.999f  // Koeffizienten-Decay (je näher 1, desto kleiner der Einfluss, nur bemerkbar bei langer Stille) --> Verhindert Driften der Koeffizieten bei Stille / keinem Signal
 #define MAX_COEFF_VALUE      10.0f    // Maximale Koeffizientengröße --> Verhindert Instabilität durch entgleisende Koeffizienten
 #define ENERGY_SMOOTHING     0.99f    // Glättung für Energieschätzung
 #define ENERGY_SMOOTHING_INV 0.01f    // (1 - ENERGY_SMOOTHING) vorberechnet
-
+#define LUT_SIZE             256    // Größe der Sinus-Lookup-Tabelle   
+#define ZWEI_PI              6.28318530718f // 2 * Pi
+#define HALF_PI              1.57079632679f // Pi / 2
 /**
  * @brief Adaptive Rauschunterdrückung mittels Block-LMS-Algorithmus für sinusförmige Störsignale
  * 
@@ -19,6 +20,7 @@
  * - Das bereinigtes Signal (Fehlersignal) ergibt sich aus der Differenz von Eingang und Schätzung
  * - Die Filterkoeffizienten werden nach der LMS-Regel adaptiv angepasst: w(n+1) = w(n) + 2*μ*e(n)*x(n)
  * 
+ * @param sinus_LUT      LookUp-Tabelle für Sinuswerte
  * @param inputBlock     Zeiger auf den Eingangspuffer mit gestörten Samples
  * @param outputBlock    Zeiger auf den Ausgangspuffer für bereinigte Samples (muss allokiert sein)
  * @param filterCoeffs   Zeiger auf Array der adaptiven Filterkoeffizienten (Größe: M)
@@ -32,7 +34,7 @@
  * 
  * @note filterCoeffs sollte vor dem ersten Aufruf mit Nullen initialisiert werden
  */
-void blockLMS(float *inputBlock, float *outputBlock, float *filterCoeffs, int anzSamples, int M, float mu, float stoerFreq, float abtastFreq);
+void blockLMS(float *sinus_LUT, float *inputBlock, float *outputBlock, float *filterCoeffs, int anzSamples, int M, float mu, float stoerFreq, float abtastFreq);
 
 /**
  * @brief Überprüft und begrenzt falls nötig den Koeffizientenwert um entgleisen zu verhindern
@@ -46,5 +48,23 @@ void blockLMS(float *inputBlock, float *outputBlock, float *filterCoeffs, int an
  */
 float clippingCheck(float coeff);
 
+/**
+ * @brief Initialisiert eine Quater-Sinus-Lookup-Tabelle um Sinusberechnungen einzusparen
+ * 
+ * Funktionsweise:
+ * - Erstellt eine Lookup-Tabelle mit Sinuswerten für den Bereich 0 bis Pi/2 
+ * - Über triognomische Funktionen können restliche Werte bestimmt werden
+ * 
+ * @param sinus_LUT Zeiger auf den LUT-Puffer
+ */
+void quaterLUT(float *sinus_LUT);
+
+/**
+ * @brief Holt sich den korrspondierenden Wert aus der LUT
+ * 
+ * @param phase momentaner Phasenwert, der aus der LUT geholt werden soll
+ * @return Sinus-Wert
+ */
+float getSineLUT(float *sinus_LUT, float phase);
 
 #endif
