@@ -98,18 +98,10 @@ Das bearbeitete Signal (inklusive des simulierten Brummens) kann als neue WAV-Da
 
 ***
 
-## 5. Anwendungsbeispiel (Workflow)
+## 5. Workflow:
 
 1. **Datei laden**: Nutzer öffnet eine saubere Sprachaufnahme.
 2. **Störung hinzufügen**: Nutzer aktiviert "Rauschen", wählt "Trafo-Brummen" und setzt Amplitude auf 10%.
-3. **Analyse**: Nutzer zoomt im Spektrum auf 0-400Hz, um die 50Hz-Spitze und ihre Obertöne zu sehen.
-4. **Export**: Nutzer speichert die Datei als `testfile_brummen.wav`.
-5. **DSP-Test**: Diese Datei kann nun in den C++ LMS-Filter eingespeist werden, um zu prüfen, ob er das Brummen entfernen kann.
-<span style="display:none">[^1][^2]</span>
-
-<div align="center">⁂</div>
-
-[^1]: blockLMS.cpp
-
-[^2]: LMS.hpp
+3. **Export**: Nutzer speichert die Datei als `testfile_brummen.wav`. Oder:
+4. **Abspielen**: Nutzer speist den Ton direkt in den DSP ein.
 
