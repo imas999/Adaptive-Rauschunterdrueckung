@@ -1,8 +1,10 @@
 # Adaptive Rauschunterdrückung mit Block-LMS
 
-Adaptive 50Hz-Störunterdrückung für DSP-Board FM4-176-S6E2CC-ETH mittels Block-LMS Algorithmus.
+Adaptive 50Hz-Sinus-Störunterdrückung für DSP-Board FM4-176-S6E2CC-ETH mittels Block-LMS Algorithmus.
 Dieses Projekt implementiert einen adaptiven Block-LMS Filter zur Unterdrückung von 50Hz Netzbrummen in Audiosignalen. 
 Die Implementierung ist optimiert für Echtzeit-Verarbeitung auf einem Embedded DSP-Board.
+
+Parameter: M = 24, mu = 0.001, BLOCK_SIZE = 256
 
 ## Installation
 
@@ -24,19 +26,6 @@ pip install -r requirements.txt
 ```
 
 ##  Verwendung
-
-### C++ Algorithmus
-
-```cpp
-#include "LMS.hpp"
-
-// In Ihrer Audio-Callback-Funktion:
-float input_block[BLOCK_SIZE];  // Input samples
-float output_block[BLOCK_SIZE]; // Output samples
-
-// Für jeden Block:
-blockLMS(input_block, output_block, BLOCK_SIZE, SAMPLE_RATE);
-```
 
 ### Python Tests
 
